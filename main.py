@@ -45,73 +45,71 @@ def add_furigana(text, mecab_tagger):
                 for char in reading
             )
 
-            # Use MeCab to get readings for individual kanji characters
+            # Count the number of kanji in the surface form
+            kanji_count = sum(1 for char in surface if is_kanji(char))
+            if kanji_count == 0:
+                result.append(surface)
+                continue
+
+            # Process kanji sequences with proper reading distribution
+            # First, identify kanji positions and non-kanji (kana) positions
+            char_types = []  # 1 for kanji, 0 for non-kanji
+            for char in surface:
+                char_types.append(1 if is_kanji(char) else 0)
+
+            # Remove kana characters from reading that correspond to kana in surface
+            reading_for_kanji = reading
+            reading_pos = 0
+            for i, char in enumerate(surface):
+                if not is_kanji(char) and "\u3040" <= char <= "\u30ff":
+                    # This is a kana character, remove corresponding kana from reading
+                    if reading_pos < len(reading_for_kanji):
+                        reading_for_kanji = (
+                            reading_for_kanji[:reading_pos]
+                            + reading_for_kanji[reading_pos + 1 :]
+                        )
+                    else:
+                        # We've reached the end of the reading
+                        break
+                else:
+                    reading_pos += 1
+
+            # Now distribute the remaining reading (reading_for_kanji) among kanji characters
+            # For simplicity, try to distribute evenly
+            reading_per_kanji = len(reading_for_kanji) // kanji_count
+            remainder = len(reading_for_kanji) % kanji_count
+
+            # Generate the processed text with ruby tags
             processed_surface = ""
+            kanji_index = 0
+            reading_start = 0
 
-            # Create character to reading mapping
-            if len(surface) == len(reading):
-                # Simple 1:1 mapping
-                for i, char in enumerate(surface):
-                    if is_kanji(char):
-                        processed_surface += (
-                            f"<ruby><rb>{char}</rb><rt>{reading[i]}</rt></ruby>"
-                        )
+            for i, char in enumerate(surface):
+                if is_kanji(char):
+                    # Calculate how many kana this kanji gets
+                    char_reading_len = reading_per_kanji
+                    if kanji_index < remainder:
+                        char_reading_len += 1
+
+                    # Extract this kanji's reading
+                    if reading_start + char_reading_len <= len(reading_for_kanji):
+                        char_reading = reading_for_kanji[
+                            reading_start : reading_start + char_reading_len
+                        ]
                     else:
-                        processed_surface += char
-            else:
-                # For more complex words with kanji that map to multiple kana
-                # Get the kana-only version of the surface form
-                kana_only = ""
-                for char in surface:
-                    if is_kanji(char):
-                        continue
-                    if "\u3040" <= char <= "\u30ff":  # Hiragana/katakana range
-                        kana_only += char
+                        char_reading = reading_for_kanji[reading_start:]
 
-                # Initialize the reading position
-                reading_pos = 0
+                    # Add ruby tag
+                    processed_surface += (
+                        f"<ruby><rb>{char}</rb><rt>{char_reading}</rt></ruby>"
+                    )
 
-                # Process each character
-                for char in surface:
-                    if not is_kanji(char):
-                        processed_surface += char
-                        # If it's kana, advance reading position to skip this character
-                        if "\u3040" <= char <= "\u30ff":
-                            reading_pos += 1
-                    else:
-                        # This is kanji, find its reading
-                        # Find where in the reading this kanji's reading ends
-                        # by matching the next kana in surface with reading
-
-                        # Find next kana in surface after this kanji
-                        next_kana_pos = -1
-                        for i in range(surface.index(char) + 1, len(surface)):
-                            if "\u3040" <= surface[i] <= "\u30ff":
-                                next_kana_pos = i
-                                break
-
-                        # If there's no next kana, the reading goes to the end
-                        if next_kana_pos == -1:
-                            char_reading = reading[reading_pos:]
-                            reading_pos = len(reading)
-                        else:
-                            # Otherwise, find where in reading the next kana appears
-                            next_kana = surface[next_kana_pos]
-                            next_kana_reading_pos = reading.find(next_kana, reading_pos)
-
-                            if next_kana_reading_pos == -1:
-                                # Fallback if we can't find the next kana in reading
-                                char_reading = reading[reading_pos:]
-                                reading_pos = len(reading)
-                            else:
-                                char_reading = reading[
-                                    reading_pos:next_kana_reading_pos
-                                ]
-                                reading_pos = next_kana_reading_pos
-
-                        processed_surface += (
-                            f"<ruby><rb>{char}</rb><rt>{char_reading}</rt></ruby>"
-                        )
+                    # Update counters
+                    reading_start += char_reading_len
+                    kanji_index += 1
+                else:
+                    # For non-kanji characters, just add them as is
+                    processed_surface += char
 
             result.append(processed_surface)
         else:
