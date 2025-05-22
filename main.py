@@ -45,8 +45,135 @@ def add_furigana(text, mecab_tagger):
                 for char in reading
             )
 
-            # For verbs and adjectives where only the first part is kanji
+            # Debug the specific pattern for words like "男の子"
             kanji_positions = [i for i, char in enumerate(surface) if is_kanji(char)]
+            kana_positions = [
+                i
+                for i, char in enumerate(surface)
+                if not is_kanji(char) and "\u3040" <= char <= "\u30ff"
+            ]
+
+            # Special handling for kanji separated by kana
+            if (
+                len(kanji_positions) > 1
+                and len(kana_positions) > 0
+                and kana_positions[0] > kanji_positions[0]
+            ):
+                # We have kanji-kana-kanji pattern like "男の子"
+                processed_surface = ""
+
+                # Track positions
+                current_pos = 0
+                reading_pos = 0
+
+                # Process each character
+                i = 0
+                while i < len(surface):
+                    if is_kanji(surface[i]):
+                        # Find group of consecutive kanji
+                        kanji_start = i
+                        while i < len(surface) and is_kanji(surface[i]):
+                            i += 1
+                        kanji_end = i
+
+                        # Extract this kanji group
+                        kanji_group = surface[kanji_start:kanji_end]
+
+                        # Find reading for this kanji group
+                        # Look for the next kana character in surface
+                        next_kana_pos = -1
+                        for j in range(kanji_end, len(surface)):
+                            if "\u3040" <= surface[j] <= "\u30ff":
+                                next_kana_pos = j
+                                break
+
+                        # If there's a next kana, find where it appears in the reading
+                        if next_kana_pos != -1:
+                            next_kana = surface[next_kana_pos]
+                            next_kana_reading_pos = reading.find(next_kana, reading_pos)
+
+                            if next_kana_reading_pos != -1:
+                                # Found the kana in the reading
+                                kanji_reading = reading[
+                                    reading_pos:next_kana_reading_pos
+                                ]
+                                reading_pos = next_kana_reading_pos
+                            else:
+                                # Couldn't find the kana, use proportional approach
+                                chars_left = sum(
+                                    1
+                                    for j in range(kanji_start, len(surface))
+                                    if is_kanji(surface[j])
+                                )
+                                reading_left = len(reading) - reading_pos
+                                this_reading_len = reading_left // max(1, chars_left)
+                                kanji_reading = reading[
+                                    reading_pos : reading_pos + this_reading_len
+                                ]
+                                reading_pos += this_reading_len
+                        else:
+                            # This is the last kanji group, use the rest of the reading
+                            kanji_reading = reading[reading_pos:]
+                            reading_pos = len(reading)
+
+                        # Add ruby tag for this kanji group
+                        processed_surface += f"<ruby><rb>{kanji_group}</rb><rt>{kanji_reading}</rt></ruby>"
+                    else:
+                        # Add non-kanji character as-is
+                        processed_surface += surface[i]
+
+                        # If it's a kana character, move the reading position forward
+                        if "\u3040" <= surface[i] <= "\u30ff":
+                            if (
+                                reading_pos < len(reading)
+                                and surface[i] == reading[reading_pos]
+                            ):
+                                reading_pos += 1
+
+                        i += 1
+
+                result.append(processed_surface)
+                continue
+
+            # Pattern matching for specific word types
+            if len(surface) == len(reading) and all(
+                surface[i] == reading[i] if not is_kanji(surface[i]) else True
+                for i in range(len(surface))
+            ):
+                # Perfect match between surface and reading for non-kanji chars
+                # Examples: "男の子" (otoko no ko), "私は" (watashi wa)
+
+                processed_surface = ""
+                i = 0
+                while i < len(surface):
+                    if is_kanji(surface[i]):
+                        # Find consecutive kanji
+                        start = i
+                        while i < len(surface) and is_kanji(surface[i]):
+                            i += 1
+                        end = i
+
+                        # Extract reading for this kanji group
+                        # First, find where this kanji group's reading ends in the full reading
+                        reading_end = end
+                        while reading_end < len(reading) and (
+                            end >= len(surface) or surface[end] != reading[reading_end]
+                        ):
+                            reading_end += 1
+
+                        kanji_reading = reading[start:reading_end]
+                        kanji_surface = surface[start:end]
+
+                        processed_surface += f"<ruby><rb>{kanji_surface}</rb><rt>{kanji_reading}</rt></ruby>"
+                    else:
+                        # Non-kanji character, add as-is
+                        processed_surface += surface[i]
+                        i += 1
+
+                result.append(processed_surface)
+                continue
+
+            # For verbs and adjectives where only the first part is kanji
 
             # Use a single ruby tag for consecutive kanji
             consecutive_kanji_groups = []
