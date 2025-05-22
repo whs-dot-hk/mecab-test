@@ -1,0 +1,89 @@
+version = 1
+revision = 2
+requires-python = ">=3.11"
+
+[[package]]
+name = "beautifulsoup4"
+version = "4.13.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "soupsieve" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d8/e4/0c4c39e18fd76d6a628d4dd8da40543d136ce2d1752bd6eeeab0791f4d6b/beautifulsoup4-4.13.4.tar.gz", hash = "sha256:dbb3c4e1ceae6aefebdaf2423247260cd062430a410e38c66f2baa50a8437195", size = 621067, upload-time = "2025-04-15T17:05:13.836Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/50/cd/30110dc0ffcf3b131156077b90e9f60ed75711223f306da4db08eff8403b/beautifulsoup4-4.13.4-py3-none-any.whl", hash = "sha256:9bbbb14bfde9d79f38b8cd5f8c7c85f4b8f2523190ebed90e950a8dea4cb1c4b", size = 187285, upload-time = "2025-04-15T17:05:12.221Z" },
+]
+
+[[package]]
+name = "bs4"
+version = "0.0.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "beautifulsoup4" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c9/aa/4acaf814ff901145da37332e05bb510452ebed97bc9602695059dd46ef39/bs4-0.0.2.tar.gz", hash = "sha256:a48685c58f50fe127722417bae83fe6badf500d54b55f7e39ffe43b798653925", size = 698, upload-time = "2024-01-17T18:15:47.371Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/51/bb/bf7aab772a159614954d84aa832c129624ba6c32faa559dfb200a534e50b/bs4-0.0.2-py2.py3-none-any.whl", hash = "sha256:abf8742c0805ef7f662dce4b51cca104cffe52b835238afc169142ab9b3fbccc", size = 1189, upload-time = "2024-01-17T18:15:48.613Z" },
+]
+
+[[package]]
+name = "mecab-python3"
+version = "1.0.10"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/00/df/eeb4e250fc0a69b0a2deed5573f2c8d8445cf643cb9ecf25674f8186880f/mecab_python3-1.0.10.tar.gz", hash = "sha256:21cd4416043e9a993fcfb986dde93e4366a07543dd95849b5ef2e50c9a9afcce", size = 78691, upload-time = "2024-10-31T08:39:21.198Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/16/f4/250b48eeb97d91e68abbd19c2d4004d94f5a0dc2da5a4cd3f1b7f89e6971/mecab_python3-1.0.10-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:ebc8bbdb7e0c616e1467b02cadc3c7a764912dec241b31a14c90b1c1ac58afc8", size = 524258, upload-time = "2024-10-31T08:44:54.149Z" },
+    { url = "https://files.pythonhosted.org/packages/01/ec/e02b957dbbe88646f1c0b270349803d568b7e1c00c406b4845492dcfa89f/mecab_python3-1.0.10-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:3d66bbda223e64bf1eb320809b5d7e21fc6b045ccc14e07232d8592dd40b1a29", size = 487872, upload-time = "2024-10-31T08:44:55.634Z" },
+    { url = "https://files.pythonhosted.org/packages/ee/eb/9625aec931274c334281a295cfac613306a8e0a3a5ec02cc4bede3d27842/mecab_python3-1.0.10-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:9eed9b626a82eb26e571e45832b7c03b46e250e57c70d7309aa0c28c0fb95d47", size = 483815, upload-time = "2024-10-31T08:44:56.672Z" },
+    { url = "https://files.pythonhosted.org/packages/bf/62/37009633618b1f375c8405c86b07cefb57d835da5caefe76e8fb1a47330c/mecab_python3-1.0.10-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:01c1123fb64fb67d29e7221a9cba36b589b795683bd94e762d87385a9633de95", size = 567522, upload-time = "2024-10-31T09:00:18.346Z" },
+    { url = "https://files.pythonhosted.org/packages/be/16/d11439668399742f0d2db99468073c125c138018ffe6541b92989116cb86/mecab_python3-1.0.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:da59058da7459457f14382ddb6a2bb4a80176d0dcfa3eb835c53abd11e5aa97d", size = 588839, upload-time = "2024-10-31T08:40:31.214Z" },
+    { url = "https://files.pythonhosted.org/packages/35/6a/8a5270ab60b5abdb50b80ce74eddef9f0e2413a337736149c4247d070b58/mecab_python3-1.0.10-cp311-cp311-win_amd64.whl", hash = "sha256:1eca068650d9f228072820ce015eb5831b9114afe6cc0f381208eaa2e1f23f0f", size = 502482, upload-time = "2024-10-31T08:40:10.37Z" },
+    { url = "https://files.pythonhosted.org/packages/4a/fc/f953fee2281e0a07097746cf7e8d65db4c8fef1cc802d592698d5eaea0c5/mecab_python3-1.0.10-cp312-cp312-macosx_10_13_universal2.whl", hash = "sha256:fb21b38fea3da3a3c893b6af34f9d34e4846c30f7d2f76fe58beee195963fbf3", size = 523841, upload-time = "2024-10-31T08:44:58.502Z" },
+    { url = "https://files.pythonhosted.org/packages/db/15/0ab350c455bab548c7c427f0f3b8b208416234238ef02248b065c01103da/mecab_python3-1.0.10-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:7fa96813dca31ad1517a1c5921b5620713fdefea072795ec9de31425fcf2c4e1", size = 487662, upload-time = "2024-10-31T08:45:00.25Z" },
+    { url = "https://files.pythonhosted.org/packages/f1/13/0379d4e98c16c167dc4b3a277f9c96c4743ea33597512370e52a47c727f1/mecab_python3-1.0.10-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:134e2c68a783f545bc8373601469d017a13d9b7cac46d243ec1bbfb2c94639a3", size = 484280, upload-time = "2024-10-31T08:45:03.21Z" },
+    { url = "https://files.pythonhosted.org/packages/43/b7/d978455fd39b026cdc592f8f137ae90c33f66617f7f724ee966a2d9dbb9a/mecab_python3-1.0.10-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2d9ff1c7a7ec4f42c98d74db71bc9b1d513db4cf676a023665ae40197f2da040", size = 569029, upload-time = "2024-10-31T09:00:19.823Z" },
+    { url = "https://files.pythonhosted.org/packages/b0/65/579514a5d178e6eb9c695daace47f0f807e7286882771bbb840ac89db660/mecab_python3-1.0.10-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2953a3e53fa269f2e1b109de3a55fc7668e9e566f0340a69c2202a37f0447691", size = 591165, upload-time = "2024-10-31T08:40:32.274Z" },
+    { url = "https://files.pythonhosted.org/packages/dd/1f/5f01f355d7eb959cbad63743d2d475b854d3b1a264926e40b92f233ca17f/mecab_python3-1.0.10-cp312-cp312-win_amd64.whl", hash = "sha256:308cbec46e426d53bde1f97a95ea655d3e6fcababe0c444dd74c9d3f8105a179", size = 503231, upload-time = "2024-10-31T08:41:39.341Z" },
+    { url = "https://files.pythonhosted.org/packages/52/16/750ae35344f62497d4b894ae49941ebfb4ea6166219e39349dc51e16e238/mecab_python3-1.0.10-cp313-cp313-macosx_10_13_universal2.whl", hash = "sha256:711ee9a7ba27aa6988b580951671e5966d7b9aa16cae453d17a5e149d295941c", size = 523860, upload-time = "2024-10-31T08:45:04.671Z" },
+    { url = "https://files.pythonhosted.org/packages/71/82/98c753089eb42793ada8b92b4f616cdf004637fe61f77eb81adbe12cf274/mecab_python3-1.0.10-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:1cc4e90d23b57e1ea4bf0ecc57cf7cdbc432164398b67ad113256bc20ed52154", size = 487672, upload-time = "2024-10-31T08:45:07.12Z" },
+    { url = "https://files.pythonhosted.org/packages/81/06/c132d772cf14b9ec5dd94eba03dfef2aad8db14ec9c614a3717ef657b877/mecab_python3-1.0.10-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:4b90261aa514f29c6e05bd99717a02eeb9be3d7ea0a0be01f65ce0d86c572c68", size = 484283, upload-time = "2024-10-31T08:45:08.447Z" },
+    { url = "https://files.pythonhosted.org/packages/7d/ee/2772cb0ba2fff59504c7ed715da626187c0f115542953f76e035531d040e/mecab_python3-1.0.10-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:894d87d708545314359cfd1b062238c2756d8f985b4c3fe7cabdf111f533a367", size = 568847, upload-time = "2024-10-31T09:00:21.345Z" },
+    { url = "https://files.pythonhosted.org/packages/8d/99/5bb828c0aeb3f02657f237304aab296526aa5463fe4f6c23c3008d536478/mecab_python3-1.0.10-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7bd7b86dd39a068dadf06ba8dd717ec1defb2cea181c5cbc6c54b1adb6dd0d4b", size = 591008, upload-time = "2024-10-31T08:40:33.333Z" },
+    { url = "https://files.pythonhosted.org/packages/cd/e2/c752bc635c21fc45a02844e52bb61799f93c5cef4292ea5a252e11818093/mecab_python3-1.0.10-cp313-cp313-win_amd64.whl", hash = "sha256:3528ef81cc4c9506ae3b273958fe2314aa1022a8db64640e631e09fd3e1af97b", size = 503240, upload-time = "2024-10-31T08:42:08.547Z" },
+]
+
+[[package]]
+name = "mecab-test"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "beautifulsoup4" },
+    { name = "bs4" },
+    { name = "mecab-python3" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "beautifulsoup4" },
+    { name = "bs4", specifier = ">=0.0.2" },
+    { name = "mecab-python3" },
+]
+
+[[package]]
+name = "soupsieve"
+version = "2.7"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/3f/f4/4a80cd6ef364b2e8b65b15816a843c0980f7a5a2b4dc701fc574952aa19f/soupsieve-2.7.tar.gz", hash = "sha256:ad282f9b6926286d2ead4750552c8a6142bc4c783fd66b0293547c8fe6ae126a", size = 103418, upload-time = "2025-04-20T18:50:08.518Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e7/9c/0e6afc12c269578be5c0c1c9f4b49a8d32770a080260c333ac04cc1c832d/soupsieve-2.7-py3-none-any.whl", hash = "sha256:6e60cc5c1ffaf1cebcc12e8188320b72071e922c2e897f737cadce79ad5d30c4", size = 36677, upload-time = "2025-04-20T18:50:07.196Z" },
+]
+
+[[package]]
+name = "typing-extensions"
+version = "4.13.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f6/37/23083fcd6e35492953e8d2aaaa68b860eb422b34627b13f2ce3eb6106061/typing_extensions-4.13.2.tar.gz", hash = "sha256:e6c81219bd689f51865d9e372991c540bda33a0379d5573cddb9a3a23f7caaef", size = 106967, upload-time = "2025-04-10T14:19:05.416Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8b/54/b1ae86c0973cc6f0210b53d508ca3641fb6d0c56823f288d108bc7ab3cc8/typing_extensions-4.13.2-py3-none-any.whl", hash = "sha256:a439e7c04b49fec3e5d3e2beaa21755cadbbdc391694e28ccdd36ca4a1408f8c", size = 45806, upload-time = "2025-04-10T14:19:03.967Z" },
+]

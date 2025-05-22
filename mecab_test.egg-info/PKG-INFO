@@ -1,0 +1,64 @@
+Metadata-Version: 2.4
+Name: mecab-test
+Version: 0.1.0
+Summary: Process HTML files containing Japanese text by adding furigana to kanji characters
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: mecab-python3
+Requires-Dist: beautifulsoup4
+Requires-Dist: bs4>=0.0.2
+
+# Japanese HTML Furigana Processor
+
+This program processes HTML files containing Japanese text by adding furigana (reading guides) to kanji characters while preserving existing formatting and ruby annotations.
+
+## Features
+
+- Adds furigana to kanji characters in Japanese text
+- Preserves existing ruby annotations
+- Maintains all HTML formatting and structure
+- Converts katakana readings to hiragana for furigana
+
+## Requirements
+
+- Python 3.11+
+- MeCab with dictionary (mecab-ipadic-neologd recommended)
+- BeautifulSoup4
+
+## Installation
+
+1. Install MeCab and a dictionary:
+   ```
+   apt-get install mecab libmecab-dev mecab-ipadic-utf8
+   ```
+
+2. Install the required Python packages:
+   ```
+   pip install mecab-python3 beautifulsoup4
+   ```
+
+## Usage
+
+Run the program with:
+
+```
+python main.py <input_html_file> [output_html_file]
+```
+
+If the output file is not specified, the result will be saved to `<input_html_file>.processed.html`.
+
+### Example
+
+```
+python main.py sample.html
+```
+
+This will process `sample.html` and save the output to `sample.html.processed.html`.
+
+## How It Works
+
+1. The program parses the HTML file using BeautifulSoup
+2. It processes text nodes, avoiding existing ruby tags
+3. For each text node containing kanji, it uses MeCab to analyze the Japanese text
+4. It adds furigana readings only to kanji characters
+5. The processed HTML is saved with all original formatting preserved

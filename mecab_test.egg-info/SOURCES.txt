@@ -1,0 +1,8 @@
+README.md
+main.py
+pyproject.toml
+mecab_test.egg-info/PKG-INFO
+mecab_test.egg-info/SOURCES.txt
+mecab_test.egg-info/dependency_links.txt
+mecab_test.egg-info/requires.txt
+mecab_test.egg-info/top_level.txt

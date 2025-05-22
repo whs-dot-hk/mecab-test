@@ -1,0 +1,15 @@
+[project]
+name = "mecab-test"
+version = "0.1.0"
+description = "Process HTML files containing Japanese text by adding furigana to kanji characters"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mecab-python3",
+    "beautifulsoup4",
+    "bs4>=0.0.2",
+]
+
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
